@@ -1,0 +1,53 @@
+no 1
+=========
+declare
+    fpeg UTL_FILE.FILE_TYPE;
+    cursor peg is
+    select employee_id,first_name,last_name, rpad(substr(salary,1,1),4,'*') as     salary from employees;
+
+begin
+   fpeg := UTL_FILE.FOPEN('DIR1','employee.txt','w');
+       UTL_FILE.NEW_LINE(fpeg);
+   for x in peg loop
+       UTL_FILE.PUT_LINE(fpeg,x.employee_id ||';'||x.first_name||';'|| x.last_name||';'|| x.salary);
+   end loop;
+UTL_FILE.FCLOSE(fpeg);
+end;
+/
+
+no2
+===========
+declare
+  fcicilan UTL_FILE.FILE_TYPE;
+  vkode char(10);
+  vnama varchar2(25);
+  vtotal number(9);
+  vcicilan1 number(9);
+  vtglbayar1  date;
+  vcicilan2 number(9);
+  vtglbayar2 date;
+
+begin
+  fcicilan := UTL_FILE.FOPEN('DIR1','cicilan.txt','R');
+  loop
+    create or replace trigger trg_cicilan
+    after update of vcicilan2 on cicilan
+    declare
+    begin
+    update vcicilan2
+    	set bayar = vbayar1 + vbayar2;
+    if bayar = vbayar1 + vbayar 2 then status = ‘Lunas’;
+
+  insert into cicilan values(vkode, vnama, vcicilan, vtglbayar1, vcicilan2,vstatus);
+  end loop;
+   exception
+  when others then UTL_FILE.FCLOSE(femp);
+end;
+/
+
+
+
+
+
+
+
